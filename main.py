@@ -4,8 +4,8 @@ from email.message import EmailMessage
 from string import Template
 from pathlib import Path
 
-SELF_NAME = "name"
-SENDER = "sender@gmail.com"
+SENDER_NAME = "name"
+SENDER_ADRESS = "sender@gmail.com"
 PASSWORD = "1234"
 
 class Recipient():
@@ -71,7 +71,7 @@ def send_mails(recipients):
         "local_time": meeting.astimezone(r.tz).strftime("%A, %B %d, %H:%M"),
         "city": r.tz,
         "time_until_meeting": strfdelta(time_until_meeting),
-        "self": str(SELF_NAME)
+        "self": str(SENDER_NAME)
         }
     
         email.set_content(html.substitute(html_substitutions),"html")
@@ -79,7 +79,7 @@ def send_mails(recipients):
         with smtplib.SMTP(host="smtp.gmail.com",port=587) as smpt:
             smpt.ehlo()
             smpt.starttls()
-            smpt.login(SENDER,PASSWORD)
+            smpt.login(SENDER_ADRESS,PASSWORD)
             smpt.send_message(email)
             print(f"Sent mail to {r.name}.")
 
