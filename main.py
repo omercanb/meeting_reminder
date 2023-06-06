@@ -5,6 +5,8 @@ from string import Template
 from pathlib import Path
 
 SELF_NAME = "name"
+SENDER = "sender@gmail.com"
+PASSWORD = "1234"
 
 class Recipient():
     def __init__(self, name, adress, tz_offset:int, city:str):
@@ -77,7 +79,7 @@ def send_mails(recipients):
         with smtplib.SMTP(host="smtp.gmail.com",port=587) as smpt:
             smpt.ehlo()
             smpt.starttls()
-            smpt.login("omercanbaykara@gmail.com","rxvanxyefitammdg")
+            smpt.login(SENDER,PASSWORD)
             smpt.send_message(email)
             print(f"Sent mail to {r.name}.")
 
