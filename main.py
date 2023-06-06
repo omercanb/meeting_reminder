@@ -52,7 +52,7 @@ def strfdelta(tdelta:datetime.timedelta):
         return "{minutes} minutes".format(**d) if d["minutes"] > 1 else "{minutes} minute".format(**d)
 
 
-def send_mails(recipients, SELF_NAME):
+def send_mails(recipients):
     meeting = (datetime.datetime(**meeting_datetime, tzinfo = datetime.timezone.utc))
     time_until_meeting = (datetime.datetime(**meeting_datetime, tzinfo = datetime.timezone.utc) 
                           - datetime.datetime.now(tz = datetime.timezone.utc))
@@ -69,7 +69,7 @@ def send_mails(recipients, SELF_NAME):
         "local_time": meeting.astimezone(r.tz).strftime("%A, %B %d, %H:%M"),
         "city": r.tz,
         "time_until_meeting": strfdelta(time_until_meeting),
-        "self": str(self_name)
+        "self": str(SELF_NAME)
         }
     
         email.set_content(html.substitute(html_substitutions),"html")
